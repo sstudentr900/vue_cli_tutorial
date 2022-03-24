@@ -1,46 +1,76 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-const routes = [
-    {
+const routes = [{
         path: '/',
         name: 'home',
         component: HomeView
     },
     {
+        path: '/create',
+        name: 'create',
+        component: () =>
+            import ('../views/createView.vue')
+    },
+    {
+        path: '/axios',
+        name: 'axios',
+        component: () =>
+            import ('../views/axiosView.vue')
+    },
+    {
+        path: '/von',
+        name: 'von',
+        component: () =>
+            import ('../views/vonView.vue')
+    },
+    {
+        path: '/for',
+        name: 'for',
+        component: () =>
+            import ('../views/forView.vue')
+    },
+    {
         path: '/store',
         name: 'store',
-        component: () => import('../views/storeView.vue')
+        component: () =>
+            import ('../views/storeView.vue')
     },
     {
         path: '/prop',
         name: 'prop',
-        component: () => import('../views/propView.vue')
+        component: () =>
+            import ('../views/propView.vue')
     },
     {
         path: '/emit',
         name: 'emit',
-        component: () => import('../views/emitView.vue')
+        component: () =>
+            import ('../views/emitView.vue')
     },
     {
         path: '/routquery',
         name: 'routquery',
-        component: () => import('../views/routqueryView.vue')
+        component: () =>
+            import ('../views/routqueryView.vue')
     },
     {
         path: '/scrollToTop',
         name: 'scrollToTop',
-        component: () => import('../views/scrollToTopView.vue')
+        component: () =>
+            import ('../views/scrollToTopView.vue')
     },
     {
         path: '/model',
         name: 'model',
-        component: () => import('../views/modelView.vue')
+        component: () =>
+            import ('../views/modelView.vue')
     },
     {
         path: '/i18n',
         name: 'i18n',
-        component: () => import('../views/i18nView.vue')
+        component: () =>
+            import ('../views/i18nView.vue')
     }
 ]
 

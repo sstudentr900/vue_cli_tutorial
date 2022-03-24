@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h1>store</h1>
+        <h2>store</h2>
         <p>{{books}}</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'HomeView',
     mounted(){
         this.$store.dispatch("fetchBookList");
     },
