@@ -75,11 +75,25 @@ const routes = [{
 ]
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes,
-    // scrollBehavior() {
-    //     return { x: 0, y: 0, behavior: "smooth" };
-    // },
+        history: createWebHistory(process.env.BASE_URL),
+        routes,
+        // scrollBehavior() {
+        //     return { x: 0, y: 0, behavior: "smooth" };
+        // },
+    })
+    // 全域設置進入路由之前的時間點
+router.beforeEach((to, from, next) => {
+    // 當路由物件的 meta 設有 requiresAuth 時
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // 尚未登入
+        // if (!Token) {
+        //     next({ path: '/login' }) // 導向登入頁面
+        // } else {
+        //     next() // 登入成功，則可繼續往下執行
+        // }
+        next() // 登入成功，則可繼續往下執行
+    } else {
+        next() // 確保一定要使用 next()
+    }
 })
-
 export default router
