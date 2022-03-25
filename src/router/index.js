@@ -19,6 +19,12 @@ const routes = [{
             import ('../views/axiosView.vue')
     },
     {
+        path: '/lifecycle',
+        name: 'lifecycle',
+        component: () =>
+            import ('../views/lifecycleView.vue')
+    },
+    {
         path: '/von',
         name: 'von',
         component: () =>
