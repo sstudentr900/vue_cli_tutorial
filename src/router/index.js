@@ -7,10 +7,22 @@ const routes = [{
         component: HomeView
     },
     {
+        path: '/search/:key',
+        name: 'search',
+        component: () =>
+            import ('../views/createView.vue')
+    },
+    {
         path: '/create',
         name: 'create',
         component: () =>
             import ('../views/createView.vue')
+    },
+    {
+        path: '/shopping',
+        name: 'shopping',
+        component: () =>
+            import ('../views/shoppingView.vue')
     },
     {
         path: '/axios',
@@ -31,16 +43,22 @@ const routes = [{
             import ('../views/vonView.vue')
     },
     {
+        path: '/vif',
+        name: 'vif',
+        component: () =>
+            import ('../views/vifView.vue')
+    },
+    {
         path: '/for',
         name: 'for',
         component: () =>
             import ('../views/forView.vue')
     },
     {
-        path: '/store',
-        name: 'store',
+        path: '/vuex',
+        name: 'vuex',
         component: () =>
-            import ('../views/storeView.vue')
+            import ('../views/vuexView.vue')
     },
     {
         path: '/prop',
@@ -77,6 +95,12 @@ const routes = [{
         name: 'i18n',
         component: () =>
             import ('../views/i18nView.vue')
+    },
+    {
+        path: '/music',
+        name: 'music',
+        component: () =>
+            import ('../views/musicView.vue')
     }
 ]
 

@@ -1,19 +1,162 @@
 <template>
     <div>
-        <h2>router-link：導航</h2>
+        <h2>路由模式</h2>
+        <h2>history模式 </h2>
+        <ul>
+            <li>HTML 5 的 pushState() 和 replaceState() (History API)</li>
+            <li>onpopstate 事件監聽</li>
+        </ul>
+        <pre><code>history.pushState(state [,title][,url]); // 歷史記錄中增加一條記錄<br>history.replaceState(state [,title][,url]); // 修改目前的歷史紀錄</code></pre>
+        <h2> hash模式</h2>
+        <ul>
+            <li>URL 中的 # 符號，例如: https://www.example.com/#yoyoyo</li>
+            <li>改變 # 後面的值，不會向 Server 發送請求，也不會刷新頁面</li>
+            <li>觸發 hashchange 事件</li>
+        </ul>
+        <h2>router-link</h2>
+        <pre>router-link :to="{ name: 'user', params: { userId: 123 }}">User /router-link</pre>
+        <p>name 路由的名稱</p>
+        <p>params path的值</p>
+        <pre>
+            const router = new VueRouter({
+                routes: [
+                    {
+                        path: '/user/:userId',
+                        name: 'user', 
+                        component: ...
+                    }
+                ]
+            }
+        </pre>
         <p>to 目標路由</p>
         <img src="https://imgur.com/oNzcMgO.jpg" alt="">
         <p>tag 渲染標籤</p>
         <img src="https://imgur.com/IAVhyTq.jpg" alt="">
-        <h2>點擊的路由產生class</h2>
+        <p>點擊的路由產生class</p>
         <p>.router-link-exact-active 和 .router-link-active</p>
-        <h2>$route.query物件</h2>
+        <hr>
+        <h2>router</h2>
+        <p>$router.replace 不會向 history 留下紀錄</p>
+        <p>$router.push 可以返回上一頁</p>
+        <p>字串形式改變路由</p>
+        <pre>
+            this.$router.push('/search/kk?v=a')
+            this.$router.push(`/search/kk?v=${this.key}`)
+        </pre>
+        <button type='button' @click="pushFn">字串形式改變路由</button>
+        <p>對象形式改變路由</p>
+        <p>path: '/search/:key?' 加問號是用在可傳params也可不傳,否則上一頁會錯誤</p>
+        <p>params{key:''||undefined} 不給值須寫成這樣</p>
+        <pre>
+            //methods
+            //search/key/?k=b
+            this.$router.push({
+                name: 'search',
+                params:{key:'key'},
+                query:{k:'b'}
+            })
+            //router
+            {
+                path: '/search/:key',
+                name: 'search',
+                component: () =>...
+            }
+        </pre>
+        <button type='button' @click="pushFn_object">對象形式改變路由</button>
+        <h2>路由傳地props</h2>
+        <p>直接獲取</p>
+        <pre>
+            //template
+            {{$route.params.key}}
+            {{$route.query.k}}
+        </pre>
+        <p>對象寫法</p>
+        <pre>
+            //router
+            {
+                path: '...'
+                name: '...'
+                props: {a:'1'}
+            }
+
+            //template
+            {{a}}
+
+            //script
+            export default {
+                props: ['a']
+            }
+        </pre>
+        <p>函數寫法</p>
+        <pre>
+            //router
+            {
+                path: '...'
+                name: '...'
+                props: ($route)=>{
+                    return {params:$route.params.key,query:$route.query.k}
+                }
+            }
+
+            //template
+            {{params}}
+
+            //script
+            export default {
+                props: ['params','query']
+            }
+        </pre>
+        <h2>路由訊息(meta)改變template顯示</h2>
+        <pre>
+            //router
+            {
+                path: '/home'
+                name: 'home'
+                meta: {show:true}
+            }
+            //template
+            //判斷路徑
+            v-show="$route.path=='/home'"
+            //meta
+            v-show="$route.meta"
+        </pre>
+        <h2>轉址 (redirect)</h2>
+        <p>將/a 轉頁到 /b</p>
+        <pre>
+            const router = new VueRouter({
+                routes: [
+                    { path: '/a', redirect: '/b' }
+                ]
+            })
+        </pre>
+        <h2>別名 (alias)</h2>
+        <p>和轉址差異在於，轉址是 URL 會被替換；而別名像是替路由再取另個名字，但網址列看到的 URL 不會被替換</p>
+        <pre>
+            const router = new VueRouter({
+                routes: [
+                    { path: '/a', component: A, alias: '/b' }
+                ]
+            })
+        </pre>
+        <h2>Navigation Guards</h2>
+        <p>start beforeRouteLeave 離開路由(元件)</p>
+        <p>beforeEach 進入新的路由前(全域)</p>
+        <p>beforeEnter 進入新的路由前</p>
+        <p>beforeRouteEnter 路由尚未進入元件時</p>
+        <p>beforeResolve 路由和搭配元件已被解析</p>
+        <p>afterEach 路由跳轉完</p>
+        <p>beforeCreate 元件建立前</p>
+        <p>created 元件已建立</p>
+        <p>beforeMount 掛載前</p>
+        <p>mounted 掛載完成</p>
         <button type='button' @click="buttonFn">改變route</button>
-        <p>searchText:{{searchText}}</p>
+        <p>search = {{searchText}}</p>
         <br>
         <br>
         <hr>
         <a href="https://ithelp.ithome.com.tw/articles/10279602">路由搜查隊</a>
+        <a href="https://ithelp.ithome.com.tw/articles/10278056"> Vue Router</a>
+        <a href="https://www.youtube.com/watch?v=QENGUJK9ecc&list=PLmOn9nNkQxJEFpabd412vGw_k7-lHlJOP&index=8"> 路由传递参数</a>
     </div>
 </template>
 
@@ -21,7 +164,7 @@
 
 export default {
     beforeRouteEnter(to, from, next) {
-        console.log(12)
+        // console.log(12)
         next((vm) => {
             if (to.query.search) {
                 vm.searchText = to.query.search;
@@ -39,9 +182,26 @@ export default {
     computed: {
     },
     methods:{
+
+        //對象形式
+        pushFn_object(){
+            //search/key/?k=b
+            this.$router.push({
+                name: 'search',
+                params:{key:'key'},
+                query:{k:'b'}
+            })
+        },
+        //字串形式
+        pushFn(){
+            this.$router.push('/search/kk?v=a')
+            // this.$router.push(`/search/kk?v=${this.key}`)
+        },
         buttonFn() {
             console.log(this.$route.name)
             //url?search=customText
+            // $router.replace 不會向 history 留下紀錄
+            // $router.push，返回上一頁
             this.$router.replace({
                 name: this.$route.name,
                 query: { search: '566' },

@@ -3,8 +3,9 @@
         <router-link to="/">Home</router-link>
         <router-link to="/create">create</router-link>
         <router-link to="/von">von</router-link>
+        <router-link to="/vif">vif</router-link>
         <router-link to="/for">for</router-link>
-        <router-link to="/store">vuex</router-link>
+        <router-link to="/vuex">vuex</router-link>
         <router-link to="/lifecycle">lifecycle</router-link>
         <router-link to="/prop">prop</router-link>
         <router-link to="/emit">emit</router-link>
@@ -13,6 +14,8 @@
         <router-link to="/scrollToTop">scrollToTop</router-link>
         <router-link to="/model">model</router-link>
         <router-link to="/i18n">i18n</router-link>
+        <router-link to="/music">music</router-link>
+        <router-link to="/shopping">shopping</router-link>
     </nav>
     <main>
         <router-view class="container" />
