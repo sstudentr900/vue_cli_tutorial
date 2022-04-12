@@ -14,22 +14,24 @@
             <li>觸發 hashchange 事件</li>
         </ul>
         <h2>router-link</h2>
-        <pre>router-link :to="{ name: 'user', params: { userId: 123 }}">User /router-link</pre>
+        <p>to 路由</p>
+        <img src="https://imgur.com/oNzcMgO.jpg" alt="">
         <p>name 路由的名稱</p>
         <p>params path的值</p>
         <pre>
-            const router = new VueRouter({
-                routes: [
-                    {
-                        path: '/user/:userId',
-                        name: 'user', 
-                        component: ...
-                    }
-                ]
-            }
+        //template
+        :to="{ name: 'user', params: { userId: 123 },query:{k:12}}">
+        
+        //router
+        const router = new VueRouter({
+            routes: [
+                {
+                    path: '/user/:userId',
+                    name: 'user', 
+                }
+            ]
+        }
         </pre>
-        <p>to 目標路由</p>
-        <img src="https://imgur.com/oNzcMgO.jpg" alt="">
         <p>tag 渲染標籤</p>
         <img src="https://imgur.com/IAVhyTq.jpg" alt="">
         <p>點擊的路由產生class</p>
@@ -45,8 +47,6 @@
         </pre>
         <button type='button' @click="pushFn">字串形式改變路由</button>
         <p>對象形式改變路由</p>
-        <p>path: '/search/:key?' 加問號是用在可傳params也可不傳,否則上一頁會錯誤</p>
-        <p>params{key:''||undefined} 不給值須寫成這樣</p>
         <pre>
             //methods
             //search/key/?k=b
@@ -55,6 +55,7 @@
                 params:{key:'key'},
                 query:{k:'b'}
             })
+
             //router
             {
                 path: '/search/:key',
@@ -63,12 +64,26 @@
             }
         </pre>
         <button type='button' @click="pushFn_object">對象形式改變路由</button>
+        <p>補充</p>
+        <pre>
+            //methods
+            this.$router.push({
+                //不給值須寫成這樣
+                params:{key:''||undefined},
+            })
+
+            //router
+            {
+                //加問號是用在可傳params也可不傳,否則上一頁會錯誤
+                path: '/search/:key?',
+            }
+        </pre>
         <h2>路由傳地props</h2>
         <p>直接獲取</p>
         <pre>
             //template
-            {{$route.params.key}}
-            {{$route.query.k}}
+            $route.params.key
+            $route.query.k
         </pre>
         <p>對象寫法</p>
         <pre>
@@ -80,7 +95,7 @@
             }
 
             //template
-            {{a}}
+            a
 
             //script
             export default {

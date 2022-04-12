@@ -49,6 +49,12 @@ const routes = [{
             import ('../views/vifView.vue')
     },
     {
+        path: '/components',
+        name: 'components',
+        component: () =>
+            import ('../views/componentsView.vue')
+    },
+    {
         path: '/for',
         name: 'for',
         component: () =>

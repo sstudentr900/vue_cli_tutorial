@@ -5,6 +5,7 @@
         <router-link to="/von">von</router-link>
         <router-link to="/vif">vif</router-link>
         <router-link to="/for">for</router-link>
+        <router-link to="/components">components</router-link>
         <router-link to="/vuex">vuex</router-link>
         <router-link to="/lifecycle">lifecycle</router-link>
         <router-link to="/prop">prop</router-link>
