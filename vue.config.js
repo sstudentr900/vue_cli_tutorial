@@ -14,5 +14,15 @@ module.exports = defineConfig({
             compositionOnly: true,
             fullInstall: true
         }
+    },
+
+    //代理跨域
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'https://bookshelf.goodideas-studio.com',
+                //pathRewrite: { '^/api': '' }, //路徑從寫
+            }
+        }
     }
 })
