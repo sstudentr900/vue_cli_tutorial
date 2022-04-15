@@ -81,6 +81,56 @@
 
         </pre>
 
+
+        <h2>進度條(nprogress)</h2>
+        <pre>
+            //npm 安裝進度條
+            npm install nprogress
+
+            //api/request.js
+            // 引入進度條
+            import nprogress from "nprogress";
+            // 引入進度條樣式
+            import "nprogress/nprogress.css";
+
+            requests.interceptors.request.use(
+                function(config) {
+                    //進度條開始動
+                    nprogress.start();
+
+                    //config 配置對象有headers請求頭
+                    return config;
+                },
+                function(error) {
+                    return Promise.reject(error);
+                }
+            );
+
+            requests.interceptors.response.use(
+                function(response) {
+                    //進度條結束
+                    nprogress.done();
+
+                    // 任何 HTTP status code 為 2xx 開頭時觸發此函式
+                    return response;
+                },
+                function(error) {
+                    // 任何 HTTP status code 非 2xx 開頭時觸發此函式
+                    return Promise.reject(error.response);
+                }
+            );
+
+            //script 調用
+            import { reqCategoryList } from '@/api';
+            reqCategoryList()
+        </pre>
+        <br>
+        <br>
+        <hr>
+        <a href="https://www.youtube.com/watch?v=B_weIItFtTI&list=PLmOn9nNkQxJEFpabd412vGw_k7-lHlJOP&index=17">nprogress进度条的使用</a>
+
+
+
         <h2>範例</h2>
         <div class="bookshelf">
             <!--<p>{{axiosFn()}}</p>-->
@@ -110,6 +160,7 @@
 <script>
 import axios from "axios";
 import { GET } from '@/api/api';
+import { reqCategoryList } from '@/api';
 export default {
     data() {
         return {
@@ -118,7 +169,8 @@ export default {
     },
     //實例已創建
     created() {
-        var obj = this
+        //axios
+        // var obj = this
         // axios
         // .get("https://bookshelf.goodideas-studio.com/api")
         // .then(function(response){
@@ -128,11 +180,15 @@ export default {
     },
     //此時可找到 DOM 節點
     mounted(){
-        //使用封裝axios
+        //使用封裝GET
         // GET().then(function(response){
         //     console.log(response.list)
-        //     // obj.bookList = response.data.list
         // });
+
+        //使用封裝reqCategoryList
+        reqCategoryList().then(function(response){
+            console.log(response)
+        })
     }
     // methods:{
         // async axiosFn(){

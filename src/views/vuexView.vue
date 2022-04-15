@@ -62,18 +62,56 @@
             },
         </pre>
         <p>{{books}}</p>
+        <h2>mapState 取得State裡的值</h2>
+        <pre>
+            //script 引入
+            import {mapState} from "vuex";
+
+            //computed 使用 count是State裡的值
+            ...mapState(["count"])
+        </pre>
+        <p>{{count}}</p>
+        <button @click='count_add'>add</button>
+        <br>
+        <br>
+        <hr>
+        <a href="https://www.youtube.com/watch?v=0rr2EtM44bA&list=PLmOn9nNkQxJEFpabd412vGw_k7-lHlJOP&index=18"> vuex模块式开发</a>
+        <a href="https://medium.com/itsems-frontend/vue-vuex4-modules-ddb3eec6b834"> Vuex 是什麼</a>
     </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
 export default {
     mounted(){
         this.$store.dispatch("fetchBookList");
     },
     computed: {
         books() {
+            //大倉
             return this.$store.getters["bookList"];
         },
+
+        //取得小倉home
+        // count() {
+        //     return this.$store.state.test.count;
+        // },
+        // ...mapState({
+        //     count: state => state.test.count,
+        // }),
+        // ...mapState('test',{
+        //     count: state => state.count,
+        // }),
+        ...mapState('test',["count"]),
+
+
+        
     },
+    methods:{
+        count_add(){
+            //呼叫 home active
+            this.$store.dispatch("test/count_add");
+        },
+    }
 }
 </script>
