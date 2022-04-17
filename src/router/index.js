@@ -97,6 +97,12 @@ const routes = [{
             import ('../views/modelView.vue')
     },
     {
+        path: '/image',
+        name: 'image',
+        component: () =>
+            import ('../views/imageView.vue')
+    },
+    {
         path: '/i18n',
         name: 'i18n',
         component: () =>
