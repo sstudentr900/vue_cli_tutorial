@@ -57,7 +57,12 @@
         <h2>取得路由path</h2>
         <pre>
             //template
+            //path
             v-show="$route.path=='/home'"
+
+            //script
+            //params
+            $route.params.id
         </pre>
         <hr>
         <h2>router</h2>
