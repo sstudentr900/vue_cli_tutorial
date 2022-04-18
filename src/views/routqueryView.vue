@@ -7,7 +7,7 @@
             <li>onpopstate 事件監聽</li>
         </ul>
         <pre><code>history.pushState(state [,title][,url]); // 歷史記錄中增加一條記錄<br>history.replaceState(state [,title][,url]); // 修改目前的歷史紀錄</code></pre>
-        <h2> hash模式</h2>
+        <h2>hash模式</h2>
         <ul>
             <li>URL 中的 # 符號，例如: https://www.example.com/#yoyoyo</li>
             <li>改變 # 後面的值，不會向 Server 發送請求，也不會刷新頁面</li>
@@ -16,10 +16,27 @@
         <h2>router-link</h2>
         <p>to 路由</p>
         <img src="https://imgur.com/oNzcMgO.jpg" alt="">
-        <p>name 路由的名稱</p>
-        <p>params path的值</p>
+        <p>:to 路由</p>
         <pre>
         //template
+        //(/user/12/34)
+        //name 路由的名稱  params path的值
+        :to="{ name: 'user', params: { userId: 12, userId2: 34 }}">
+        
+        //router
+        const router = new VueRouter({
+            routes: [
+                {
+                    path: '/user/:userId/:userId2',
+                    name: 'user', 
+                }
+            ]
+        }
+        </pre>
+        <pre>
+        //template
+        //(/user/123?k=12)
+        //query ?的值
         :to="{ name: 'user', params: { userId: 123 },query:{k:12}}">
         
         //router
@@ -36,6 +53,12 @@
         <img src="https://imgur.com/IAVhyTq.jpg" alt="">
         <p>點擊的路由產生class</p>
         <p>.router-link-exact-active 和 .router-link-active</p>
+        <hr>
+        <h2>取得路由path</h2>
+        <pre>
+            //template
+            v-show="$route.path=='/home'"
+        </pre>
         <hr>
         <h2>router</h2>
         <p>$router.replace 不會向 history 留下紀錄</p>

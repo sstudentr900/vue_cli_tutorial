@@ -15,6 +15,7 @@
         <router-link to="/scrollToTop">scrollToTop</router-link>
         <router-link to="/model">model</router-link>
         <router-link to="/image">image</router-link>
+        <router-link to="/lodash">lodash</router-link>
         <router-link to="/i18n">i18n</router-link>
         <router-link to="/music">music</router-link>
         <router-link to="/shopping">shopping</router-link>
