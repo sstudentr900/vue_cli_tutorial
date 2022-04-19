@@ -16,6 +16,7 @@
         <router-link to="/model">model</router-link>
         <router-link to="/image">image</router-link>
         <router-link to="/lodash">lodash</router-link>
+        <router-link to="/mockjs">mockjs</router-link>
         <router-link to="/i18n">i18n</router-link>
         <router-link to="/music">music</router-link>
         <router-link to="/shopping">shopping</router-link>
@@ -71,12 +72,13 @@ nav+main{
 }
 pre {
     margin-bottom: 26px;
-    padding: 16px;
+    padding: 16px 0 0 0;
     font-size: 15px;
     color: #c4c4c4;
     background-color: #232323;
     border: none;
     border-radius: 4px;
+    /* white-space: pre-line; */
 }
 pre code{
     display: block;

@@ -103,6 +103,12 @@ const routes = [{
             import ('../views/imageView.vue')
     },
     {
+        path: '/mockjs',
+        name: 'mockjs',
+        component: () =>
+            import ('../views/mockjsView.vue')
+    },
+    {
         path: '/i18n',
         name: 'i18n',
         component: () =>
