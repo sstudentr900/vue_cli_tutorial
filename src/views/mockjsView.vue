@@ -7,7 +7,28 @@
         </pre>
         <p>再項目中src夾創建mock文件夾</p>
         <p>新增banner.json文件,要格式化</p>
-        <p>圖片要放在public 打包在dist文件</p>
+        <pre>
+            //banner.json
+            //圖片要放在public 打包在dist文件
+            [
+                {
+                    "id": "1",
+                    "imgUrl": "banner1.jpg"
+                },
+                {
+                    "id": "2",
+                    "imgUrl": "banner2.jpg"
+                },
+                {
+                    "id": "3",
+                    "imgUrl": "banner3.jpg"
+                },
+                {
+                    "id": "4",
+                    "imgUrl": "banner4.jpg"
+                }
+            ]
+        </pre>
         <p>創建mockServe.js</p>
         <pre>
         //引入mockjs
@@ -16,10 +37,9 @@
         //把JSON數據引入
         //webpack 默認圖片 json數據所以不用對外爆露
         import banner from './banner.json';
-
+        
         //使用mockjs模拟数据 第一個請求網址 第二個請求數據
-        Mock.mock('/mock/banner',{code:200,data:banner};
-        Mock.mock('/mock/floor',{code:200,data:floor};
+        Mock.mock('/mock/banner',{code:200,data:banner});
         </pre>
         <p>在main.js 引入mockServe.js</p>
         <pre>
