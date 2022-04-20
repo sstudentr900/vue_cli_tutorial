@@ -133,6 +133,12 @@ const routes = [{
             import ('../views/slide3View.vue')
     },
     {
+        path: '/swiper',
+        name: 'swiper',
+        component: () =>
+            import ('../views/swiperView.vue')
+    },
+    {
         path: '/i18n',
         name: 'i18n',
         component: () =>
