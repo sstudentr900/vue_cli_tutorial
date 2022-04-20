@@ -52,15 +52,15 @@ img{
   font-size: 0;
 }
 .slider_list > img {
-  position: relative;
+  position: absolute;
   top: 0%;
   left: 0%;
   width: 100%;
   height: auto;
 }
-.slider_list > img:first-of-type {
+/* .slider_list > img:first-of-type {
   position: relative;
-}
+} */
 .slider_dots {
   display: flex;
   justify-content: center;
