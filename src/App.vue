@@ -17,6 +17,10 @@
         <router-link to="/image">image</router-link>
         <router-link to="/lodash">lodash</router-link>
         <router-link to="/mockjs">mockjs</router-link>
+        <router-link to="/transition">transition</router-link>
+        <router-link to="/slide">slide</router-link>
+        <router-link to="/slide2">slide2</router-link>
+        <router-link to="/slide3">slide3</router-link>
         <router-link to="/i18n">i18n</router-link>
         <router-link to="/music">music</router-link>
         <router-link to="/shopping">shopping</router-link>

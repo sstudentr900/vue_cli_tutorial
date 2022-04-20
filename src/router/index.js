@@ -109,6 +109,30 @@ const routes = [{
             import ('../views/mockjsView.vue')
     },
     {
+        path: '/transition',
+        name: 'transition',
+        component: () =>
+            import ('../views/transitionView.vue')
+    },
+    {
+        path: '/slide',
+        name: 'slide',
+        component: () =>
+            import ('../views/slideView.vue')
+    },
+    {
+        path: '/slide2',
+        name: 'slide2',
+        component: () =>
+            import ('../views/slide2View.vue')
+    },
+    {
+        path: '/slide3',
+        name: 'slide3',
+        component: () =>
+            import ('../views/slide3View.vue')
+    },
+    {
         path: '/i18n',
         name: 'i18n',
         component: () =>
