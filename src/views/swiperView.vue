@@ -21,38 +21,45 @@
       </pre>
       <h4>watch(監聽數據)+nectTick(循環結束執行,數據修改後執行)</h4>
       <pre>
-        //監聽數據
         watch:{
-          //接收到ajax data 
-          slideData(newValue,oldValue){
-            //數據修改後執行
-            this.$nextTick(()=>{
-              //執行Swiper
-              new Swiper(".mySwiper", {
-                modules: [Navigation, Pagination],
-                // If we need pagination
-                pagination: {
-                  el: '.swiper-pagination',
-                  clickable: true  //pagination click
-                },
+          //監聽數據
+          slideData:{
+            //接收到ajax data 
+            handler:function(){
+              console.log(12);
+              //數據修改後執行
+              this.$nextTick(()=>{
+                //執行Swiper
+                new Swiper(
+                  // ".mySwiper", 同下
+                  this.$refs.mySwiper,
+                  {
+                    modules: [Navigation, Pagination],
+                    // If we need pagination
+                    pagination: {
+                      el: '.swiper-pagination',
+                      clickable: true  //pagination click
+                    },
 
-                // Navigation arrows
-                navigation: {
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                },
+                    // Navigation arrows
+                    navigation: {
+                      nextEl: '.swiper-button-next',
+                      prevEl: '.swiper-button-prev',
+                    },
 
-                autoplay: {
-                    delay: 1000,
-                },
-                loop: true 
+                    autoplay: {
+                        delay: 1000,
+                    },
+                    loop: true 
+                  }
+                )
               })
-            })
+            }
           }
-        },
+        }
       </pre>
       <h4>實作</h4>
-      <div class="swiper mySwiper">
+      <div class="swiper mySwiper" ref="mySwiper">
           <div class="swiper-wrapper">
               <!--<div class="swiper-slide" v-for="(item,index) in items" :key="item.id"><img :src="item.src"></div>-->
               <div class="swiper-slide page1">page 1</div>
@@ -70,6 +77,9 @@
           <!-- If we need scrollbar -->
           <div class="swiper-scrollbar"></div>
       </div>
+      <br>
+      <input v-model="slideData" placeholder="slideData_watch">
+      <p>Message is: {{ slideData }}</p>
       <br>
       <br>
       <a href="https://ithelp.ithome.com.tw/articles/10272948">輪播套件-swiper</a>
@@ -101,41 +111,48 @@ import 'swiper/css/pagination';
 export default {
   data() {
     return {
-      slideData:[]
+      slideData:''
     };
   },
   mounted() {
     //get ajax data
-    slideData.push('1')
-    
+    // this.slideData.push('1')
+    // console.log(this.slideData)
   },
-  //監聽數據
   watch:{
-    //接收到ajax data 
-    slideData(newValue,oldValue){
-      //數據修改後執行
-      this.$nextTick(()=>{
-        //執行Swiper
-        new Swiper(".mySwiper", {
-          modules: [Navigation, Pagination],
-          // If we need pagination
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true  //pagination click
-          },
+    //監聽數據
+    slideData:{
+      //接收到ajax data 
+      handler:function(){
+        console.log(12);
+        //數據修改後執行
+        this.$nextTick(()=>{
+          //執行Swiper
+          new Swiper(
+            // ".mySwiper", 同下
+            this.$refs.mySwiper,
+            {
+              modules: [Navigation, Pagination],
+              // If we need pagination
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true  //pagination click
+              },
 
-          // Navigation arrows
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
+              // Navigation arrows
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
 
-          autoplay: {
-              delay: 1000,
-          },
-          loop: true 
+              autoplay: {
+                  delay: 1000,
+              },
+              loop: true 
+            }
+          )
         })
-      })
+      }
     }
   },
   // computed:{
