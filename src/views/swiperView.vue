@@ -19,7 +19,33 @@
         import Swiper from 'swiper';
         import 'swiper/css';
       </pre>
-      <h4>watch(監聽數據)+nectTick(循環結束執行,數據修改後執行)</h4>
+      <h4>引入swiperJS</h4>
+      <p>在mounted引用</p>
+      <pre>
+        mounted() {
+          new Swiper(
+            // ".mySwiper", 同下
+            this.$refs.mySwiper,
+            {
+              modules: [Navigation, Pagination],
+              // If we need pagination
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true  //pagination click
+              },
+
+              // Navigation arrows
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+
+              loop: true 
+            }
+          )
+        }
+      </pre>
+      <p>mounted找不到資料就要改成watch(監聽數據)+nectTick(循環結束執行,數據修改後執行)</p>
       <pre>
         watch:{
           //監聽數據
@@ -30,29 +56,7 @@
               //數據修改後執行
               this.$nextTick(()=>{
                 //執行Swiper
-                new Swiper(
-                  // ".mySwiper", 同下
-                  this.$refs.mySwiper,
-                  {
-                    modules: [Navigation, Pagination],
-                    // If we need pagination
-                    pagination: {
-                      el: '.swiper-pagination',
-                      clickable: true  //pagination click
-                    },
-
-                    // Navigation arrows
-                    navigation: {
-                      nextEl: '.swiper-button-next',
-                      prevEl: '.swiper-button-prev',
-                    },
-
-                    autoplay: {
-                        delay: 1000,
-                    },
-                    loop: true 
-                  }
-                )
+                new Swiper(this.$refs.mySwiper{ ... })
               })
             }
           }
