@@ -2,15 +2,25 @@
     <div>
         <h2>creare</h2>
         <p>全域安裝</p>
-        <pre><code>npm install -g @vue/cli</code></pre>
+        <pre>
+            npm install -g @vue/cli
+        </pre>
         <p>vue 版本</p>
-        <pre><code>vue --version</code></pre>
+        <pre>
+            vue --version
+        </pre>
         <p>建立專案</p>
-        <pre><code>vue create project-name</code></pre>
+        <pre>
+            vue create project-name
+        </pre>
         <p>啟動伺服器</p>
-        <pre><code>npm run serve</code></pre>
+        <pre>
+            npm run serve
+        </pre>
         <p>打包</p>
-        <pre><code>npm run build</code></pre>
+        <pre>
+            npm run build
+        </pre>
         <h2>目錄</h2>
         <ol>
             <li>public : 任何靜態檔都可以放在這，不會經過 webpack 打包</li>

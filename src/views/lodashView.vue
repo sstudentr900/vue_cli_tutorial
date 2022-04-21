@@ -1,6 +1,8 @@
 <template>
     <div>
         <h2>lodash/throttle</h2>
+        <input type="text" v-model="text" @change="methodName">
+        <p>{{text}}</p>
         <br>
         <br>
         <hr>
@@ -13,12 +15,16 @@ import throttle from "lodash/throttle";
 export default {
     data() {
         return {
+            text:''
         };
+    },
+    mounted(){
+        
     },
     methods: {
         methodName:throttle(function(){
-            //50毫秒後執行
-        },50)
+            console.log(' //執行')
+        },1000)
     },
 }
 </script>

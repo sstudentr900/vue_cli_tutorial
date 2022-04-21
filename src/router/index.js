@@ -19,6 +19,12 @@ const routes = [{
             import ('../views/createView.vue')
     },
     {
+        path: '/lodash',
+        name: 'lodash',
+        component: () =>
+            import ('../views/lodashView.vue')
+    },
+    {
         path: '/shopping',
         name: 'shopping',
         component: () =>
@@ -137,6 +143,12 @@ const routes = [{
         name: 'swiper',
         component: () =>
             import ('../views/swiperView.vue')
+    },
+    {
+        path: '/watch',
+        name: 'watch',
+        component: () =>
+            import ('../views/watchView.vue')
     },
     {
         path: '/i18n',
