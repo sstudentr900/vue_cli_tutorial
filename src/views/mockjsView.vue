@@ -29,7 +29,8 @@
                 }
             ]
         </pre>
-        <p>創建mockServe.js</p>
+
+        <h2>創建mockServe.js</h2>
         <pre>
         //引入mockjs
         import Mock from 'mockjs';
@@ -41,11 +42,54 @@
         //使用mockjs模拟数据 第一個請求網址 第二個請求數據
         Mock.mock('/mock/banner',{code:200,data:banner});
         </pre>
-        <p>在main.js 引入mockServe.js</p>
+
+        <h2>在main.js 引入mockServe.js</h2>
         <pre>
             import '@/mock/mockServe';
         </pre>
-        <p>在script 引入 api</p>
+
+        <h2>api/index.js</h2>
+        <pre>
+            import requests from './request'; //引入封裝
+            import mockrequests from './mockAjax';  //引入mockAjax
+
+            export const reqCategoryList = () => requests({ url: '/api', method: 'get' });
+            //沒有值要給空對象
+            export const reqHomeAdPost = (params) => requests({ url: '/api', method: 'post',data:params});
+            //mock get
+            export const reqCateBanner = () => mockrequests.get('/banner');
+        </pre>
+
+        <h2>在store 引入 api</h2>
+        <pre>
+        import { reqCateBanner } from '@/api';
+        const state = {
+            slide: [],
+        }
+        const mutations = {
+            slideMu(state, list) {
+                state.slide = list
+            },
+        }
+        const actions = {
+            async slide({ commit }) {
+                let result = await reqCateBanner();
+                if (result.data.code == 200) {
+                    commit('slideMu', result.data.data)
+                }
+            },
+        }
+        const getters = {}
+        export default {
+            namespaced: true,
+            state,
+            mutations,
+            actions,
+            getters,
+        }
+        </pre>
+
+        <h2>在script 引入 api</h2>
         <pre>
         import { reqCateBanner } from '@/api';
         export default {

@@ -15,7 +15,8 @@
                 },
                 getters: {
                     //透過 getters 取得 state 資料
-                    bookList: (state) => state.bookList,
+                    //網路不給力[] 先給空數據才不會undefined
+                    bookList: (state) => state.bookList || [],
                 },
                 mutations: {
                     //mutation 將資料直送並賦值給 state
@@ -49,7 +50,8 @@
                 },
             }
         </pre>
-        <p>路由 beforeEnter 發送 API：將導覽項目路由規劃成巢狀結構，直接在父層路由發送 API。</p>
+        
+        <h2>路由 beforeEnter 發送 API：將導覽項目路由規劃成巢狀結構，直接在父層路由發送 API。</h2>
         <pre>
             {
                 path: "/urlName",
@@ -61,7 +63,7 @@
                 },
             },
         </pre>
-        <p>{{books}}</p>
+
         <h2>mapState 取得State裡的值</h2>
         <pre>
             //script 引入
@@ -70,6 +72,43 @@
             //computed 使用 count是State裡的值
             ...mapState(["count"])
         </pre>
+
+        <h2>取到state</h2>
+        <pre>
+            computed: {
+                //1.
+                count() {
+                    return this.$store.state.test.count;
+                },
+
+                //2.
+                ...mapState({
+                    count: state => state.test.count,
+                }),
+
+                //3.
+                ...mapState('test',{
+                    count: state => state.count,
+                }),
+
+                //4.
+                ...mapState('test',["count"]),
+            },
+        </pre>
+
+        <h2>getters對state優化取值</h2>
+        <pre>
+        computed: {
+            books() {
+                return this.$store.getters["bookList"];
+            },
+            //他沒有組('test')可以區分直接取值
+            ...mapGetters(['bookList'])
+        },
+        </pre>
+        <p>{{books}}</p>
+
+        <h2>active 改變值</h2>
         <p>{{count}}</p>
         <button @click='count_add'>add</button>
         <br>
@@ -81,13 +120,14 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapState,mapGetters} from "vuex";
 export default {
     mounted(){
         this.$store.dispatch("fetchBookList");
     },
     computed: {
         books() {
+            console.log('books')
             //大倉
             return this.$store.getters["bookList"];
         },
@@ -104,8 +144,8 @@ export default {
         // }),
         ...mapState('test',["count"]),
 
-
-        
+        //
+        ...mapGetters(['bookList'])
     },
     methods:{
         count_add(){

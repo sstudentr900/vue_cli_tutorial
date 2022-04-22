@@ -48,6 +48,68 @@
         <a href="https://www.youtube.com/watch?v=Uwrz2XP3J44&list=PLmOn9nNkQxJEFpabd412vGw_k7-lHlJOP&index=16"> 封裝axios</a>
 
 
+        <h2>api/index.js</h2>
+        <pre>
+            import requests from './request'; //引入封裝
+            export const reqCategoryList = () => requests({ url: '/api', method: 'get' });
+            //沒有值要給空對象
+            export const reqHomeAdPost = (params) => requests({ url: '/api', method: 'post',data:params});
+        </pre>
+
+        <h2>在store 引入 api</h2>
+        <pre>
+        import { reqCategoryList } from '@/api';
+        const state = {
+            slide: [],
+            slidePost: [],
+        }
+        const mutations = {
+            slideMu(state, list) {
+                state.slide = list
+            },
+            slideMuPost(state, list) {
+                state.slidePost = list
+            },
+        }
+        const actions = {
+            async slide({ commit }) {
+                let result = await reqCategoryList();
+                if (result.data.code == 200) {
+                    commit('slideMu', result.data.data)
+                }
+            },
+            async slidePost({ commit },params={}) {
+                let result = await reqHomeAdPost(params);
+                if (result.data.code == 200) {
+                    commit('slideMuPost', result.data.data)
+                }
+            },
+        }
+        const getters = {}
+        export default {
+            namespaced: true,
+            state,
+            mutations,
+            actions,
+            getters,
+        }
+        </pre>
+
+        <h2>在script 引入 api</h2>
+        <pre>
+        import { reqCategoryList } from '@/api';
+        export default {
+            data(){
+                    return{
+                }
+            },
+            mounted(){
+                reqCategoryList().then(function(response){
+                    console.log(response)
+                })
+            },
+        }
+        </pre>
 
         <h2>跨域</h2>
         <p>跨域解決 jsonp,cros,代理</p>
