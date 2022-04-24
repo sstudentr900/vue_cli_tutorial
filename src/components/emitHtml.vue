@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>1.使用 inline events</p>
-        <!--定義好事件名稱 searchBook 及所需傳遞的參數 $event，再將事件 $emit 傳給父元件-->
+        <!--1.定義好事件名稱 searchBook 及所需傳遞的參數 $event，再將事件 $emit 傳給父元件-->
         <input
             type="text"
             @input="$emit('searchBook', $event.target.value)" />

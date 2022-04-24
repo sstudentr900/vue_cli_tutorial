@@ -11,6 +11,7 @@
         <router-link to="/watch">watch</router-link>
         <router-link to="/prop">prop</router-link>
         <router-link to="/emit">emit</router-link>
+        <router-link to="/propAndEmit">propAndEmit</router-link>
         <router-link to="/routquery">rout</router-link>
         <router-link to="/axios">axios</router-link>
         <router-link to="/scrollToTop">scrollToTop</router-link>

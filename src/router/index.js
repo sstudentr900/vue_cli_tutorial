@@ -85,6 +85,12 @@ const routes = [{
             import ('../views/emitView.vue')
     },
     {
+        path: '/propAndEmit',
+        name: 'propAndEmit',
+        component: () =>
+            import ('../views/propAndEmitView.vue')
+    },
+    {
         path: '/routquery',
         name: 'routquery',
         component: () =>
