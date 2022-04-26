@@ -73,18 +73,6 @@ const routes = [{
             import ('../views/vuexView.vue')
     },
     {
-        path: '/prop',
-        name: 'prop',
-        component: () =>
-            import ('../views/propView.vue')
-    },
-    {
-        path: '/emit',
-        name: 'emit',
-        component: () =>
-            import ('../views/emitView.vue')
-    },
-    {
         path: '/propAndEmit',
         name: 'propAndEmit',
         component: () =>

@@ -9,7 +9,6 @@
         <router-link to="/vuex">vuex</router-link>
         <router-link to="/lifecycle">lifecycle</router-link>
         <router-link to="/watch">watch</router-link>
-        <router-link to="/prop">prop</router-link>
         <router-link to="/emit">emit</router-link>
         <router-link to="/propAndEmit">propAndEmit</router-link>
         <router-link to="/routquery">rout</router-link>

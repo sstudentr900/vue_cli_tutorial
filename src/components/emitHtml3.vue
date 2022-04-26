@@ -1,17 +1,18 @@
 <template>
     <div>
-        <p>從props 來的值 : {{ childName5 }}</p>
+        <p>從v-model 來的值 : {{ message }}</p>
         <button @click="clickFn">傳值給父組件</button>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['childName5'],
+    props: ['message'],
     methods: {
         clickFn(){
-            this.$emit("childName6",'childValue')
-        },
+            console.log(22);
+            this.$emit("update:message",'childValue')
+        }
     },
 }
 </script>

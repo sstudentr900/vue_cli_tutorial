@@ -1,16 +1,18 @@
 <template>
     <div>
-        <p>1.使用 inline events</p>
-        <!--1.定義好事件名稱 searchBook 及所需傳遞的參數 $event，再將事件 $emit 傳給父元件-->
+        <p>1.使用$emit 傳給父元件</p>
         <input
             type="text"
-            @input="$emit('searchBook', $event.target.value)" />
+            @input="$emit('childName2', $event.target.value)" 
+        />
+
         <p>2.使用 setup</p>
         <input 
             type="text"
             @change='customChange'
         />
-        <p>3.使用 this.$emit</p>
+
+        <p>3.使用methods</p>
         <input 
             type="text"
             @change='searchBook'
@@ -23,16 +25,17 @@ export default {
     //2.使用 setup ,元件建立前就執行 setup
     setup (props, context) {
         const customChange = (event) => {
-            context.emit("customChange", event.target.value)
+            context.emit("childName3", event.target.value)
         }
         return {
             customChange
         }
     },
-    //3.使用 this.$emit
+
+    //3.使用methods
     methods: {
         searchBook (event) {
-            this.$emit("searchBookTwo", event.target.value)
+            this.$emit("childName4", event.target.value)
         }
     }
 }
