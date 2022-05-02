@@ -13,6 +13,15 @@
         <pre>
             vue create project-name
         </pre>
+        <p>manually select features  手動選擇</p>
+        <img src="https://ithelp.ithome.com.tw/upload/images/20210917/20141271YGDaVQosSX.png" alt="">
+        <p>CSS Pre-processors（for Sass）</p>
+        <p>Linter / Formatter （多人協作的話，最好是選起來，統一大家程式碼）</p>
+        <img src="https://ithelp.ithome.com.tw/upload/images/20210917/20141271JdeyRwLhCs.png" alt="">
+        <p>選擇設置檔存放位置 → In dedicated config files，讓配置檔各自獨立，有需要再建立配置檔即可</p>
+        <img src="https://ithelp.ithome.com.tw/upload/images/20210917/20141271X4DVkbU0d8.png" alt="">
+        <p>日後是否以本次選擇作為通用預設選項</p>
+        <img src="https://ithelp.ithome.com.tw/upload/images/20210917/20141271istQKg2sVC.png" alt="">
         <p>啟動伺服器</p>
         <pre>
             npm run serve
@@ -21,6 +30,7 @@
         <pre>
             npm run build
         </pre>
+   
         <h2>目錄</h2>
         <ol>
             <li>public : 任何靜態檔都可以放在這，不會經過 webpack 打包</li>
@@ -45,7 +55,8 @@
                 </ul>
             </li>
         </ol>
-        <h2>eslint 關閉</h2>
+        <h2>vue.config.js</h2>
+        <p>eslint 關閉</p>
         <pre>
             //vue.config.js
             module.exports = {
@@ -53,12 +64,26 @@
                 lintOnSave: false
             }
         </pre>
+        <p>domain 設定 publicPath</p>
+        <p>當路徑 https://my-vue-app.com/ 變這樣 https://github.com/alysachan830/my-vue-app/#/，就要設定 publicPath 為 /my-vue-app/</p>
+        <pre>
+        //vue.config.js 設定檔
+        module.exports = {
+            publicPath: process.env.NODE_ENV === 'production'
+            ? '/my-vue-app/'
+            : '/'
+        }
+        </pre>
+        <a href="https://ithelp.ithome.com.tw/articles/10263296">Vue CLI 的目錄架構</a>
         <h2>style 撰寫 CSS</h2>
         <p>scoped 會讓該元件在編譯時被添加一個以「data-v-」開頭代表唯一值</p>
         <img class='max' src="https://imgur.com/Lh524gw.jpg" alt="">
         <img class='max' src="https://imgur.com/FWkXaB0.jpg" alt="">
         <h2>相對路徑 @</h2>
-        <pre>import HelloWorld from "/src/components/HelloWorld.vue";<br>import HelloWorld from "@/components/HelloWorld.vue";</pre>
+        <pre>
+        import HelloWorld from "/src/components/HelloWorld.vue";
+        import HelloWorld from "@/components/HelloWorld.vue";
+        </pre>
         <br>
         <br>
         <hr>
