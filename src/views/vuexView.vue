@@ -128,8 +128,16 @@
                 stateName: []
             }
             const getters = {
+                //1.
                 getterName(state) {
                     return state.stateName.filter((item, index, array) => index > 3)
+                },
+
+                //2.
+                getterName(state) {
+                    return state.homeProductList.filter(function(item, index, array){
+                        return index > 3
+                    })
                 },
             }
 
