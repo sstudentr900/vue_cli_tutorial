@@ -64,47 +64,79 @@
             },
         </pre>
 
-        <h2>mapState 取得State裡的值</h2>
-        <pre>
-            //script 引入
-            import {mapState} from "vuex";
-
-            //computed 使用 count是State裡的值
-            ...mapState(["count"])
-        </pre>
 
         <h2>取到state</h2>
         <pre>
+             //script 引入
+            import {mapState} from "vuex";
+
+            //className 分類別名
+            //stateName state名
             computed: {
                 //1.
-                count() {
-                    return this.$store.state.test.count;
+                bindName() {
+                    return this.$store.state.className.stateName;
                 },
 
                 //2.
                 ...mapState({
-                    count: state => state.test.count,
+                    bindName: state => state.className.stateName,
                 }),
 
                 //3.
-                ...mapState('test',{
-                    count: state => state.count,
+                ...mapState('className',{
+                    bindName: state => state.stateName,
                 }),
 
-                //4.
-                ...mapState('test',["count"]),
+                //4.bindName==stateName
+                ...mapState('className',["stateName"]),
             },
         </pre>
 
-        <h2>getters對state優化取值</h2>
+        <h2>getters</h2>
+        <p>getters對state優化取值</p>
         <pre>
-        computed: {
-            books() {
-                return this.$store.getters["bookList"];
+            //script 引入
+            import {mapGetters} from "vuex";
+
+            computed: {
+                //無className寫法
+                //1.
+                getterName() {
+                    return this.$store.getters["getterName"];
+                },
+                //2.
+                ...mapGetters(['getterName']),
+
+                //有className寫法
+                //1.
+                getterName() {
+                    return this.$store.getters["className/getterName"];
+                },
+                //2.
+                ...mapGetters('className',{
+                    bindName: 'getterName',
+                }),
+                //3.
+                ...mapGetters('className',['getterName','getterName2'])
             },
-            //他沒有組('test')可以區分直接取值
-            ...mapGetters(['bookList'])
-        },
+        </pre>
+        <p>getters裡的stateName要有預設不然filter會報錯</p>
+        <pre>
+            //store
+            const state = {
+                stateName: []
+            }
+            const getters = {
+                getterName(state) {
+                    return state.stateName.filter((item, index, array) => index > 3)
+                },
+            }
+
+            //script
+            computed: {
+                ...mapGetters('className',['getterName'])
+            }
         </pre>
         <p>{{books}}</p>
 
