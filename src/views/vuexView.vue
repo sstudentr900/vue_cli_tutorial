@@ -50,6 +50,8 @@
                 },
             }
         </pre>
+        <p>{{count}}</p>
+        <button @click='count_add'>add</button>
         
         <h2>路由 beforeEnter 發送 API：將導覽項目路由規劃成巢狀結構，直接在父層路由發送 API。</h2>
         <pre>
@@ -63,7 +65,6 @@
                 },
             },
         </pre>
-
 
         <h2>取到state</h2>
         <pre>
@@ -148,9 +149,6 @@
         </pre>
         <p>{{books}}</p>
 
-        <h2>active 改變值</h2>
-        <p>{{count}}</p>
-        <button @click='count_add'>add</button>
         <br>
         <br>
         <hr>
