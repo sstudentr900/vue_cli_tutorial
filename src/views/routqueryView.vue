@@ -54,30 +54,35 @@
         <p>點擊的路由產生class</p>
         <p>.router-link-exact-active 和 .router-link-active</p>
         <hr>
-        <h2>取得路由path</h2>
-        <pre>
-            //template
-            //path
-            v-show="$route.path=='/home'"
-
-            //script
-            //params
-            $route.params.id
-        </pre>
-        <hr>
         <h2>router</h2>
-        <p>$router.replace 不會向 history 留下紀錄</p>
-        <p>$router.push 可以返回上一頁</p>
-        <p>字串形式改變路由</p>
+        <p>replace 不會向 history 留下紀錄</p>
+        <p>push 可以返回上一頁</p>
         <pre>
             this.$router.push('/search/kk?v=a')
             this.$router.push(`/search/kk?v=${this.key}`)
         </pre>
         <button type='button' @click="pushFn">字串形式改變路由</button>
-        <p>對象形式改變路由</p>
+        <p>字串形式</p>
         <pre>
+            //url
+            search/key/?k=b
+
             //methods
-            //search/key/?k=b
+            this.$router.push(`/search/${this.keyword}?k=${this.text}`)
+
+            //router
+            {
+                path: '/search/:key',
+                name: 'search',
+            }
+        </pre>
+        <p>對象形式改變路由</p>
+        <p>對象形式不能同時放path</p>
+        <pre>
+            //url
+            search/key/?k=b
+
+            //methods
             this.$router.push({
                 name: 'search',
                 params:{key:'key'},
@@ -88,31 +93,50 @@
             {
                 path: '/search/:key',
                 name: 'search',
-                component: () =>...
             }
         </pre>
         <button type='button' @click="pushFn_object">對象形式改變路由</button>
-        <p>補充</p>
+        <p>取得path</p>
+        <pre>
+            //template
+            $route.path=='/home'
+        </pre>
+        <p>(xxx/search/key/?k=b)取得params</p>
+        <pre>
+            //router
+            {
+                path: '/search/:key',
+                name: 'search',
+            }
+
+            //template
+            $route.params.keyword=> key 
+        </pre>
+        <p>(xxx/search/key/?k=b取得query)</p>
+        <pre>
+            //router
+            {
+                path: '/search/:key',
+                name: 'search',
+            }
+
+            //template
+            $route.query.k=>b
+        </pre>
+        <p>params給值不給值須寫成這樣</p>
         <pre>
             //methods
             this.$router.push({
-                //不給值須寫成這樣
                 params:{key:''||undefined},
             })
 
             //router
             {
-                //加問號是用在可傳params也可不傳,否則上一頁會錯誤
+                //加問號是用在可傳可不傳params,否則上一頁會錯誤
                 path: '/search/:key?',
             }
         </pre>
         <h2>路由傳地props</h2>
-        <p>直接獲取</p>
-        <pre>
-            //template
-            $route.params.key
-            $route.query.k
-        </pre>
         <p>對象寫法</p>
         <pre>
             //router
@@ -123,7 +147,7 @@
             }
 
             //template
-            a
+            {{a}}
 
             //script
             export default {
@@ -157,9 +181,11 @@
                 name: 'home'
                 meta: {show:true}
             }
+            
             //template
             //判斷路徑
             v-show="$route.path=='/home'"
+
             //meta
             v-show="$route.meta"
         </pre>

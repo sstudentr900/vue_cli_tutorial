@@ -65,12 +65,12 @@
             }
         </pre>
         <p>domain 設定 publicPath</p>
-        <p>當路徑 https://my-vue-app.com/ 變這樣 https://github.com/alysachan830/my-vue-app/#/，就要設定 publicPath 為 /my-vue-app/</p>
+        <p>當路徑 https://my-vue-app.com/ 變這樣 https://github.com/alysachan830/my-vue-app/name/，就要設定 publicPath 為 /my-vue-app/name</p>
         <pre>
         //vue.config.js 設定檔
         module.exports = {
             publicPath: process.env.NODE_ENV === 'production'
-            ? '/my-vue-app/'
+            ? '/my-vue-app/name'
             : '/'
         }
         </pre>
