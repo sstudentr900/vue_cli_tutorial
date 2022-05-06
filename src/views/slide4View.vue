@@ -3,14 +3,16 @@
       <h2>Slider</h2>    
       <div class="slide">
           <div class="top">
-            <img :src="nowImageSrc" alt="">
+            <img :src="welfare[nowImageIndex].src" alt="">
           </div>
           <div class="bottom">
-            <transition-group name="flip-list" tag="ul">
-                <li v-for="(item,index) in slideData" :key="item.id" :class="{active:nowImageIndex==index}" @click="clickImg(item.src,index)" :data-id="item.id" :data-index="index">
-                    <img :src="item.src" alt="">
+            <div class="content">
+              <ul v-bind:style="{transform:'translateX('+slideUl+'%)'}">                
+                <li v-for="(item,index) in welfare" :key="index" :class="{active:nowImageIndex==index}" @click="clickImg(index)">
+                  <img :src="item.src" alt="">
                 </li>
-            </transition-group>
+              </ul>
+            </div>
             <div class="ctrl">
               <div class="prev" @click="slideCtrl(1)"></div>
               <div class="next" @click="slideCtrl(-1)"></div>
@@ -54,42 +56,26 @@
   right: 3px;
   transform: translateY(-50%) rotate(-135deg);
 } 
-.slide ul {
-  margin: 0 26px;
+.slide .content {
+  margin: 5px 20px 0;
   overflow: hidden;
+}
+.slide ul {
   display: flex;
   list-style-type: none;
   padding: 0;
   font-size: 0;
+  position: relative;
 }
 .slide ul li {
-  position: relative;
-  /* 設定每一個要輪播的項目寬度 */
   flex: calc(100% / 4) 0 0;
-  /* 
-  為了達成上述圖片示意，因此除了往前推 2 個項目的距離外，
-  還要再多推 0.5 個輪播項目的距離，呈現露出半個輪播項目的樣式
-  */
-  /* left: calc(-100% / 4 * 2.5); */
-  left: calc(-70%);
-  background-color: #eee;
   height: 100%;
-  margin: 8px;
   box-sizing: border-box;
   border: 3px solid rgba(0,0,0,0);
   cursor: pointer;
 }
 .slide ul li.active{
   border: 3px solid #222;
-}
-/* .slide ul li:nth-last-child(3), */
-.slide ul li:nth-last-child(2),
-/* .slide ul li:nth-child(3), */
-.slide ul li:nth-child(2),
-.slide ul li:first-child,
-.slide ul li:last-child{
-    z-index: -1;
-    opacity: 0;
 }
 .slide ul li img{
   width: 100%;
@@ -104,7 +90,6 @@
 export default {
   data() {
     return {
-      slideData: [],
       welfare: [ 
         { 
           src: "https://unsplash.it/300/300?image=1084",
@@ -122,80 +107,77 @@ export default {
           src: "https://unsplash.it/300/300?image=1081",
           id: 4 
         },
+        { 
+          src: "https://unsplash.it/300/300?image=1084",
+          id: 5 
+        },
+        { 
+          src: "https://unsplash.it/300/300?image=1082",
+          id: 6 
+        },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1083",
+        //   id: 7 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1084",
+        //   id: 8 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1083",
+        //   id: 9 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1082",
+        //   id: 10 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1081",
+        //   id: 11 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1084",
+        //   id: 12 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1082",
+        //   id: 13 
+        // },
+        // { 
+        //   src: "https://unsplash.it/300/300?image=1083",
+        //   id: 14 
+        // },
       ],
-      nowImageIndex: 3,
-      nowImageSrc: '',
+      slideUl:0,
+      nowImageIndex: 0,
       clickWait: false,
       timer: {},
     };
   },
   mounted() {
-    for (let i = 0; i < this.welfare.length * 3; i++) {
-      let obj = {};
-      obj.id = i;
-      obj.ref = i % this.welfare.length;
-      obj.src = this.welfare[obj.ref].src
-      if(i==this.nowImageIndex){
-        this.nowImageSrc = obj.src
-      }
-      this.slideData.push(obj);
-    }
-
   },
   methods: {
     slideCtrl(slidesToShow = 1) {
-      if (this.clickWait) {
+        console.log(slidesToShow,this.nowImageIndex,this.nowImageIndex>=1,this.welfare.length-this.nowImageIndex>4)
+      if (slidesToShow > 0 && this.nowImageIndex>=1) {
+        console.log(12)
+        this.nowImageIndex--;
+        this.slideUl = this.nowImageIndex*-1*25 
+        console.log('pre',this.nowImageIndex,this.welfare.length)
         return;
       }
-      this.stopTime();
-      this.clickWait = true;
-      if (slidesToShow > 0) {
-        console.log('1')
-        const shiftItem = this.slideData.shift();
-        this.slideData.push(shiftItem);
-        this.getNowImageSrc()
-        this.setTime();
-        return;
-      }
-      if (slidesToShow < 0) {
-        console.log('2')
-        const shiftItem = this.slideData.pop();
-        this.slideData.unshift(shiftItem);
-        this.getNowImageSrc()
-        this.setTime();
+      if (slidesToShow < 0 && this.welfare.length-this.nowImageIndex>4) {
+        this.nowImageIndex++;
+        this.slideUl = this.nowImageIndex*-1*25 
+        console.log('nex',this.nowImageIndex,this.welfare.length)
       }
     },
-    getNowImageSrc(){
-      this.changeImg(this.slideData.filter((item, index)=>index===this.nowImageIndex)[0].src)
-    },
-    changeImg(src){
-      this.nowImageSrc = src
-    },
-    clickImg(src,index){
-      this.nowImageSrc = src
-      // if (this.clickWait) {
-      //   return;
-      // }
-      // this.stopTime();
-      // this.clickWait = true;
-      // const shiftItems = this.slideData.splice(0,index-this.nowImageIndex);
-      // for (let i = 0; i < shiftItems.length; i++) {
-      //   this.slideData.push(shiftItems[i]);
-      // }
-      for (let i = 0; i < index-this.nowImageIndex; i++) {
-        const shiftItem = this.slideData.shift();
-        this.slideData.push(shiftItem);
+    clickImg(index){
+      this.nowImageIndex = index
+      if(this.welfare.length-index>=4){
+        this.slideUl = this.nowImageIndex*-1*25 
       }
-      // this.setTime();
-    },
-    setTime() {
-      this.timer = setTimeout(() => {
-        this.clickWait = false;
-      }, 500);
-    },
-    stopTime() {
-      clearInterval(this.timer);
-    },
+    }
   },
 };
 </script>
