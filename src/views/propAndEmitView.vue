@@ -77,11 +77,9 @@
             }
         </pre>
         <emitHtml @childName2="parentName2" @childName3="parentName3" @childName4="parentName4"/>
-
-        <h2>範例1.method接收</h2>
+        <p>範例1.method接收</p>
         <emitHtml2 :childName5="parentName5" @childName6="parentName6"/>
-
-        <h2>範例2.$emit</h2>
+        <p>範例2.$emit</p>
         <emitHtml2 :childName5="parentName5" @childName6="value=> parentName5=value"/>
 
         <h2>v-model 與元件的雙向綁定 (Vue 3.x 新增)</h2>
@@ -105,7 +103,7 @@
         </pre>
         <emitHtml3 v-model:message="parentName7"/>
 
-        <h2>跨越層級的傳遞方式</h2>
+        <h2>跨越層級的傳遞方式(provide)</h2>
         <p>傳遞出去的資料定義在 provide</p>
         <pre>
             //父 script
@@ -127,11 +125,14 @@
         <input type="text" v-model="parentName8">
         <!-- <p>{{parentName8}}</p> -->
         <emitHtml4></emitHtml4>
+
+        <h2>傳兄弟</h2>
         <br>
         <br>
         <a href="https://book.vue.tw/CH2/2-2-communications.html">元件之間的溝通傳遞</a>
         <br>
         <a href="https://penueling.com/%E6%8A%80%E8%A1%93%E7%AD%86%E8%A8%98/vue3-%E7%9A%84%E8%B3%87%E6%96%99%E7%8B%80%E6%85%8B%E7%AE%A1%E7%90%86%EF%BC%8Cprovide-inject%E3%80%81vuex/">Vue3的資料狀態管理，provide / inject、vuex、props</a>
+        <a href="https://eudora.cc/posts/210303/">Components 間的資料傳遞</a>
     </div>
 </template>
 
