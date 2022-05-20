@@ -6,6 +6,7 @@
             //enterName1內層引用名子="外層的值"
             //: v-bind 綁定
             //childName1內層引用名子,parentName1外層引用的名子
+
             propHtml enterName1="All" :childName1="parentName1"
         </pre>
         <p>接收方式可使用以下型別</p>
@@ -103,10 +104,10 @@
         </pre>
         <emitHtml3 v-model:message="parentName7"/>
 
-        <h2>跨越層級的傳遞方式(provide)</h2>
-        <p>傳遞出去的資料定義在 provide</p>
+        <h2>父傳孫(provide/nject)</h2>
         <pre>
             //父 script
+            //傳遞出去的資料定義在 provide
             import { inject, reactive, computed } from "vue";
             provide(){
                 return {
@@ -126,13 +127,15 @@
         <!-- <p>{{parentName8}}</p> -->
         <emitHtml4></emitHtml4>
 
-        <h2>傳兄弟</h2>
+        <h2>孫傳爺（emit / listeners）</h2>
+        <h2>傳兄弟 (eventBus)</h2>
         <br>
         <br>
         <a href="https://book.vue.tw/CH2/2-2-communications.html">元件之間的溝通傳遞</a>
-        <br>
         <a href="https://penueling.com/%E6%8A%80%E8%A1%93%E7%AD%86%E8%A8%98/vue3-%E7%9A%84%E8%B3%87%E6%96%99%E7%8B%80%E6%85%8B%E7%AE%A1%E7%90%86%EF%BC%8Cprovide-inject%E3%80%81vuex/">Vue3的資料狀態管理，provide / inject、vuex、props</a>
         <a href="https://eudora.cc/posts/210303/">Components 間的資料傳遞</a>
+        <a href="https://linxinemily.github.io/2019/06/23/Vue%E7%88%BA%E5%AD%AB%E7%B5%84%E4%BB%B6%E8%B3%87%E6%96%99%E5%82%B3%E9%81%9E/">Vue $attrs/$listeners 爺孫組件資料傳遞
+</a>
     </div>
 </template>
 
