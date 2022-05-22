@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>lodash/throttle</h2>
+        <h2>lodash/throttle 节流</h2>
         <input type="text" v-model="text" @change="methodName">
         <p>{{text}}</p>
         <br>
@@ -10,21 +10,21 @@
     </div>
 </template>
 <script>
-//內建throttle(幾秒後執行) 引入lodash/throttle 
-import throttle from "lodash/throttle";
-export default {
-    data() {
-        return {
-            text:''
-        };
-    },
-    mounted(){
-        
-    },
-    methods: {
-        methodName:throttle(function(){
-            console.log(' //執行')
-        },1000)
-    },
-}
+    //內建throttle(幾秒後執行) 引入lodash/throttle 
+    import throttle from "lodash/throttle";
+    export default {
+        data() {
+            return {
+                text: ''
+            };
+        },
+        mounted() {
+
+        },
+        methods: {
+            methodName: throttle(function() {
+                console.log(' //執行')
+            }, 1000)
+        },
+    }
 </script>

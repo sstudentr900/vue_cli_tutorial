@@ -91,6 +91,12 @@ const routes = [{
             import ('../views/scrollToTopView.vue')
     },
     {
+        path: '/nprogress',
+        name: 'nprogress',
+        component: () =>
+            import ('../views/nprogressView.vue')
+    },
+    {
         path: '/model',
         name: 'model',
         component: () =>
