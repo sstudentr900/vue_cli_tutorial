@@ -112,19 +112,19 @@
 </template>
 
 <script>
-//引用API
-import { reqCateBanner } from '@/api';
-export default {
-    data(){
-        return{
-        }
-    },
-    mounted(){
-        reqCateBanner().then(function(response){
-            console.log(response)
-        })
-    },
-    computed: {
-    },
-}
+    //引用API
+    import {
+        reqCateBanner
+    } from '@/api';
+    export default {
+        data() {
+            return {}
+        },
+        mounted() {
+            reqCateBanner().then(function(response) {
+                console.log(response)
+            })
+        },
+        computed: {},
+    }
 </script>

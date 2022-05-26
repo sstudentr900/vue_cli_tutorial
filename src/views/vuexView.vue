@@ -3,20 +3,14 @@
         <h2>Vuex</h2>
         <img src="https://vuex.vuejs.org/vuex.png" alt="">
         <p>主要以四個核心概念——State、Getters、Mutations、Actions——所組成， Modules 可再進行模組化</p>
-        <p>dispatch -> action 發送 API 從後端取得資料後，commit -> mutation</p>
-        <p>mutation 改變 state，並且是唯一可以改變 state 的方法</p>
-        <p>透過 getter 取得 state 資料，再到元件中引入 getter 並將資料渲染至畫面上</p>
+        <p>dispatch -> action 發送 API 從後端取得資料後，commit -> mutation，mutation 改變 state，並且是唯一可以改變 state 的方法</p>
+        <p>getter 優化 state 資料</p>
         <pre>
             //store
             import { createStore } from 'vuex'
             export default createStore({
                 state: {
                     bookList:''
-                },
-                getters: {
-                    //透過 getters 取得 state 資料
-                    //網路不給力[] 先給空數據才不會undefined
-                    bookList: (state) => state.bookList || [],
                 },
                 mutations: {
                     //mutation 將資料直送並賦值給 state
@@ -27,10 +21,15 @@
                 },
                 actions: {
                     //action 發送 API 後將資料以 commit 呼叫 mutation
-                    fetchBookList (context) {
+                    async fetchBookList (context) {
                         const books = await GET();
                         context.commit('bookList', 'books') 
                     }
+                },
+                getters: {
+                    //透過 getters 取得 state 資料
+                    //網路不給力[] 先給空數據才不會undefined
+                    bookList: (state) => state.bookList || [],
                 },
                 modules: {
                 }
@@ -66,7 +65,11 @@
             },
         </pre>
 
-        <h2>取到state</h2>
+        <h2>Actions</h2>
+        <p>dispatch 這個函式是呼叫 action 裡面的方法。</p>
+        <p>這邊可以做非同步處理，例如 AJAX</p>
+
+        <h2>取得state</h2>
         <pre>
              //script 引入
             import {mapState} from "vuex";
@@ -89,8 +92,31 @@
                     bindName: state => state.stateName,
                 }),
 
-                //4.bindName==stateName
+                //4.
                 ...mapState('className',["stateName"]),
+            },
+        </pre>
+
+        <h2>取得Mutaitions</h2>
+        <p>commit 這個函式是呼叫 mutation 裡面的方法。</p>
+        <pre>
+             //script 引入
+            import {mapMutations} from 'vuex'
+
+            //className       類名
+            //mutationsName   mutations名
+            //fnctionName     fnction名
+            methods: {
+                //1.
+                ...mapMutations('className',{fnctionName:'mutationsName'});//methods
+                this.fnctionName(this.yourNumber);//templates 
+
+                //2.
+                ...mapMutations('className',['mutationsName']);//methods
+                this.mutationsName(this.yourNumber);//templates 
+
+                //3.
+                this.$store.commit('className/mutationsName')
             },
         </pre>
 
@@ -158,38 +184,41 @@
 </template>
 
 <script>
-import {mapState,mapGetters} from "vuex";
-export default {
-    mounted(){
-        this.$store.dispatch("fetchBookList");
-    },
-    computed: {
-        books() {
-            console.log('books')
-            //大倉
-            return this.$store.getters["bookList"];
+    import {
+        mapState,
+        mapGetters
+    } from "vuex";
+    export default {
+        mounted() {
+            this.$store.dispatch("fetchBookList");
         },
+        computed: {
+            books() {
+                console.log('books')
+                    //大倉
+                return this.$store.getters["bookList"];
+            },
 
-        //取得小倉home
-        // count() {
-        //     return this.$store.state.test.count;
-        // },
-        // ...mapState({
-        //     count: state => state.test.count,
-        // }),
-        // ...mapState('test',{
-        //     count: state => state.count,
-        // }),
-        ...mapState('test',["count"]),
+            //取得小倉home
+            // count() {
+            //     return this.$store.state.test.count;
+            // },
+            // ...mapState({
+            //     count: state => state.test.count,
+            // }),
+            // ...mapState('test',{
+            //     count: state => state.count,
+            // }),
+            ...mapState('test', ["count"]),
 
-        //
-        ...mapGetters(['bookList'])
-    },
-    methods:{
-        count_add(){
-            //呼叫 home active
-            this.$store.dispatch("test/count_add");
+            //
+            ...mapGetters(['bookList'])
         },
+        methods: {
+            count_add() {
+                //呼叫 home active
+                this.$store.dispatch("test/count_add");
+            },
+        }
     }
-}
 </script>
