@@ -25,6 +25,7 @@
         <router-link to="/slide4">slide4</router-link>
         <router-link to="/swiper">swiper</router-link>
         <router-link to="/i18n">i18n</router-link>
+        <router-link to="/element">element</router-link>
         <router-link to="/music">music</router-link>
         <router-link to="/shopping">shopping</router-link>
     </nav>

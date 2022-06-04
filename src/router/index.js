@@ -163,6 +163,12 @@ const routes = [{
             import ('../views/i18nView.vue')
     },
     {
+        path: '/element',
+        name: 'element',
+        component: () =>
+            import ('../views/element.vue')
+    },
+    {
         path: '/music',
         name: 'music',
         component: () =>
