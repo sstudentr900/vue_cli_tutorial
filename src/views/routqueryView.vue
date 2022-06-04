@@ -1,26 +1,11 @@
 <template>
     <div>
-        <h2>路由模式</h2>
-        <h2>history模式 </h2>
-        <ul>
-            <li>HTML 5 的 pushState() 和 replaceState() (History API)</li>
-            <li>onpopstate 事件監聽</li>
-        </ul>
-        <pre><code>history.pushState(state [,title][,url]); // 歷史記錄中增加一條記錄<br>history.replaceState(state [,title][,url]); // 修改目前的歷史紀錄</code></pre>
-        <h2>hash模式</h2>
-        <ul>
-            <li>URL 中的 # 符號，例如: https://www.example.com/#yoyoyo</li>
-            <li>改變 # 後面的值，不會向 Server 發送請求，也不會刷新頁面</li>
-            <li>觸發 hashchange 事件</li>
-        </ul>
         <h2>router-link</h2>
         <p>to 路由</p>
         <img src="https://imgur.com/oNzcMgO.jpg" alt="">
-        <p>:to 路由</p>
+        <p>name:路由的名稱,params:path的值(user/12/34)</p>
         <pre>
-        //template
-        //(/user/12/34)
-        //name 路由的名稱  params path的值
+        //template 
         :to="{ name: 'user', params: { userId: 12, userId2: 34 }}">
         
         //router
@@ -33,10 +18,9 @@
             ]
         }
         </pre>
+        <p>query為?後的值(/user/123?k=12)</p>
         <pre>
         //template
-        //(/user/123?k=12)
-        //query ?的值
         :to="{ name: 'user', params: { userId: 123 },query:{k:12}}">
         
         //router
@@ -53,16 +37,9 @@
         <img src="https://imgur.com/IAVhyTq.jpg" alt="">
         <p>點擊的路由產生class</p>
         <p>.router-link-exact-active 和 .router-link-active</p>
-        <hr>
-        <h2>router</h2>
-        <p>replace 不會向 history 留下紀錄</p>
-        <p>push 可以返回上一頁</p>
-        <pre>
-            this.$router.push('/search/kk?v=a')
-            this.$router.push(`/search/kk?v=${this.key}`)
-        </pre>
-        <button type='button' @click="pushFn">字串形式改變路由</button>
-        <p>字串形式</p>
+        <h2>replace(不會向history留下紀錄)</h2>
+        <h2>push(可以返回上一頁)</h2>
+        <p>字串形式路由</p>
         <pre>
             //url
             search/key/?k=b
@@ -76,8 +53,8 @@
                 name: 'search',
             }
         </pre>
-        <p>對象形式改變路由</p>
-        <p>對象形式不能同時放path</p>
+        <button type='button' @click="pushFn">字串形式改變路由</button>
+        <p>對象形式路由(不能同時放path)</p>
         <pre>
             //url
             search/key/?k=b
@@ -96,12 +73,13 @@
             }
         </pre>
         <button type='button' @click="pushFn_object">對象形式改變路由</button>
+        <h2>取得路由</h2>
         <p>取得path</p>
         <pre>
             //template
             $route.path=='/home'
         </pre>
-        <p>(xxx/search/key/?k=b)取得params</p>
+        <p>取得params(xxx/search/key/?k=b)</p>
         <pre>
             //router
             {
@@ -112,7 +90,7 @@
             //template
             $route.params.keyword=> key 
         </pre>
-        <p>(xxx/search/key/?k=b取得query)</p>
+        <p>取得query(xxx/search/key/?k=b)</p>
         <pre>
             //router
             {
@@ -136,7 +114,7 @@
                 path: '/search/:key?',
             }
         </pre>
-        <h2>路由傳地props</h2>
+        <h2>路由傳地(props)</h2>
         <p>對象寫法</p>
         <pre>
             //router
@@ -189,16 +167,17 @@
             //meta
             v-show="$route.meta"
         </pre>
-        <h2>轉址 (redirect)</h2>
+        <h2>轉址(redirect)</h2>
         <p>將/a 轉頁到 /b</p>
         <pre>
+            //router
             const router = new VueRouter({
                 routes: [
                     { path: '/a', redirect: '/b' }
                 ]
             })
         </pre>
-        <h2>別名 (alias)</h2>
+        <h2>別名(alias)</h2>
         <p>和轉址差異在於，轉址是 URL 會被替換；而別名像是替路由再取另個名字，但網址列看到的 URL 不會被替換</p>
         <pre>
             const router = new VueRouter({
@@ -207,6 +186,18 @@
                 ]
             })
         </pre>
+        <h2>history路由模式</h2>
+        <ul>
+            <li>HTML 5 的 pushState() 和 replaceState() (History API)</li>
+            <li>onpopstate 事件監聽</li>
+        </ul>
+        <pre><code>history.pushState(state [,title][,url]); // 歷史記錄中增加一條記錄<br>history.replaceState(state [,title][,url]); // 修改目前的歷史紀錄</code></pre>
+        <h2>hash路由模式</h2>
+        <ul>
+            <li>URL 中的 # 符號，例如: https://www.example.com/#yoyoyo</li>
+            <li>改變 # 後面的值，不會向 Server 發送請求，也不會刷新頁面</li>
+            <li>觸發 hashchange 事件</li>
+        </ul>
         <h2>Navigation Guards</h2>
         <p>start beforeRouteLeave 離開路由(元件)</p>
         <p>beforeEach 進入新的路由前(全域)</p>
