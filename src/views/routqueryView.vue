@@ -38,6 +38,8 @@
         <p>點擊的路由產生class</p>
         <p>.router-link-exact-active 和 .router-link-active</p>
         <h2>replace(不會向history留下紀錄)</h2>
+        <button type='button' @click="buttonFn">改變route</button>
+        <p>search = {{searchText}}</p>
         <h2>push(可以返回上一頁)</h2>
         <p>字串形式路由</p>
         <pre>
@@ -199,18 +201,45 @@
             <li>觸發 hashchange 事件</li>
         </ul>
         <h2>Navigation Guards</h2>
-        <p>start beforeRouteLeave 離開路由(元件)</p>
+        <p>beforeRouteLeave 離開路由(元件)</p>
         <p>beforeEach 進入新的路由前(全域)</p>
+        <pre>
+            //router.js (全域)
+            router.beforeEach((to, from, next) => {
+                if(token){
+                    有登入
+                }else{
+                    沒有登入
+                }
+            })
+        </pre>
         <p>beforeEnter 進入新的路由前</p>
+        <pre>
+            //router.js
+            {
+                path: '/routerName',
+                name: 'routerName',
+                component: () => import ('@/views/routerName'),
+                beforeEnter(to, from, next) {
+                    //必須由from頁進來
+                    if (from.path == '/routerName') {
+                        next();
+                    } else {
+                        next(from.path);
+                    }
+                }
+            },
+        </pre>
         <p>beforeRouteEnter 路由尚未進入元件時</p>
+        <pre>
+            //template
+        </pre>
         <p>beforeResolve 路由和搭配元件已被解析</p>
         <p>afterEach 路由跳轉完</p>
         <p>beforeCreate 元件建立前</p>
         <p>created 元件已建立</p>
         <p>beforeMount 掛載前</p>
         <p>mounted 掛載完成</p>
-        <button type='button' @click="buttonFn">改變route</button>
-        <p>search = {{searchText}}</p>
         <br>
         <br>
         <hr>
@@ -221,52 +250,55 @@
 </template>
 
 <script>
-
-export default {
-    beforeRouteEnter(to, from, next) {
-        // console.log(12)
-        next((vm) => {
-            if (to.query.search) {
-                vm.searchText = to.query.search;
-            }
-        });
-    },
-    data() {
-        return {
-            searchText: '',
-            urlText:''
-        };
-    },
-    components:{
-    },
-    computed: {
-    },
-    methods:{
-
-        //對象形式
-        pushFn_object(){
-            //search/key/?k=b
-            this.$router.push({
-                name: 'search',
-                params:{key:'key'},
-                query:{k:'b'}
-            })
-        },
-        //字串形式
-        pushFn(){
-            this.$router.push('/search/kk?v=a')
-            // this.$router.push(`/search/kk?v=${this.key}`)
-        },
-        buttonFn() {
-            console.log(this.$route.name)
-            //url?search=customText
-            // $router.replace 不會向 history 留下紀錄
-            // $router.push，返回上一頁
-            this.$router.replace({
-                name: this.$route.name,
-                query: { search: '566' },
+    export default {
+        beforeRouteEnter(to, from, next) {
+            // console.log(12)
+            next((vm) => {
+                if (to.query.search) {
+                    vm.searchText = to.query.search;
+                }
             });
         },
+        data() {
+            return {
+                searchText: '',
+                urlText: ''
+            };
+        },
+        components: {},
+        computed: {},
+        methods: {
+
+            //對象形式
+            pushFn_object() {
+                //search/key/?k=b
+                this.$router.push({
+                    name: 'search',
+                    params: {
+                        key: 'key'
+                    },
+                    query: {
+                        k: 'b'
+                    }
+                })
+            },
+            //字串形式
+            pushFn() {
+                this.$router.push('/search/kk?v=a')
+                    // this.$router.push(`/search/kk?v=${this.key}`)
+            },
+            buttonFn() {
+                console.log(this.$route.name)
+                    //url?search=customText
+                    // $router.replace 不會向 history 留下紀錄
+                    // $router.push，返回上一頁
+                this.$router.replace({
+                    name: this.$route.name,
+                    query: {
+                        search: '566'
+                    },
+                });
+            },
+        }
     }
-}
 </script>

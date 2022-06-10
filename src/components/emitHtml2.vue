@@ -6,12 +6,15 @@
 </template>
 
 <script>
-export default {
-    props: ['childName5'],
-    methods: {
-        clickFn(){
-            this.$emit("childName6",'childValue')
+    export default {
+        props: ['childName5'],
+        mounted() {
+            console.log(this.$attrs)
         },
-    },
-}
+        methods: {
+            clickFn() {
+                this.$emit("childName6", 'childValue')
+            },
+        },
+    }
 </script>

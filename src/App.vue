@@ -10,15 +10,15 @@
         <router-link to="/lifecycle">lifecycle</router-link>
         <router-link to="/watch">watch</router-link>
         <router-link to="/propAndEmit">propAndEmit</router-link>
-        <router-link to="/routquery">rout</router-link>
         <router-link to="/axios">axios</router-link>
+        <router-link to="/routquery">rout</router-link>
         <router-link to="/scrollToTop">scrollToTop</router-link>
         <router-link to="/model">model</router-link>
         <router-link to="/image">image</router-link>
+        <router-link to="/transition">transition</router-link>
         <router-link to="/lodash">lodash</router-link>
         <router-link to="/mockjs">mockjs</router-link>
         <router-link to="/nprogress">nprogress</router-link>
-        <router-link to="/transition">transition</router-link>
         <router-link to="/slide">slide</router-link>
         <router-link to="/slide2">slide2</router-link>
         <router-link to="/slide3">slide3</router-link>
@@ -26,6 +26,8 @@
         <router-link to="/swiper">swiper</router-link>
         <router-link to="/i18n">i18n</router-link>
         <router-link to="/element">element</router-link>
+        <router-link to="/lazyload">lazyload</router-link>
+        <router-link to="/nginx">nginx</router-link>
         <router-link to="/music">music</router-link>
         <router-link to="/shopping">shopping</router-link>
     </nav>

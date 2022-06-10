@@ -163,6 +163,12 @@ const routes = [{
             import ('../views/i18nView.vue')
     },
     {
+        path: '/lazyload',
+        name: 'lazyload',
+        component: () =>
+            import ('../views/lazyload.vue')
+    },
+    {
         path: '/element',
         name: 'element',
         component: () =>
@@ -173,6 +179,12 @@ const routes = [{
         name: 'music',
         component: () =>
             import ('../views/musicView.vue')
+    },
+    {
+        path: '/nginx',
+        name: 'nginx',
+        component: () =>
+            import ('../views/nginx.vue')
     }
 ]
 
