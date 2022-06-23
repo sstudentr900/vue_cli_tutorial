@@ -40,9 +40,6 @@
 </style>
 <script>
     export default {
-        components: {
-            emitHtml,
-        },
         data() {
             return {
                 clicks: 0,
