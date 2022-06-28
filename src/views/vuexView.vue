@@ -3,8 +3,6 @@
         <h2>Vuex</h2>
         <img src="https://vuex.vuejs.org/vuex.png" alt="">
         <p>主要以四個核心概念——State、Getters、Mutations、Actions——所組成， Modules 可再進行模組化</p>
-        <p>dispatch -> action 發送 API 從後端取得資料後，commit -> mutation，mutation 改變 state，並且是唯一可以改變 state 的方法</p>
-        <p>getter 優化 state 資料</p>
         <pre>
             //store
             import { createStore } from 'vuex'
@@ -65,40 +63,36 @@
             },
         </pre>
 
-        <h2>Actions</h2>
-        <p>dispatch 這個函式是呼叫 action 裡面的方法。</p>
-        <p>這邊可以做非同步處理，例如 AJAX</p>
-
-        <h2>取得state</h2>
+        
+        <h2>state</h2>
         <pre>
-             //script 引入
-            import {mapState} from "vuex";
-
             //className 分類別名
             //stateName state名
-            computed: {
-                //1.
-                bindName() {
-                    return this.$store.state.className.stateName;
-                },
+            //script 引入
+            import {mapState} from "vuex";
 
-                //2.
-                ...mapState({
-                    bindName: state => state.className.stateName,
-                }),
+            //1.
+            bindName() {
+                return this.$store.state.className.stateName;
+            },//computed
+            <tageName :items="stateName"></tageName>        //template 使用data
 
-                //3.
-                ...mapState('className',{
-                    bindName: state => state.stateName,
-                }),
+            //2.
+            ...mapState({
+                bindName: state => state.className.stateName,
+            }),//computed
 
-                //4.
-                ...mapState('className',["stateName"]),
-            },
+            //3.
+            ...mapState('className',{
+                bindName: state => state.stateName,
+            }),//computed
+
+            //4.
+            ...mapState('className',["stateName"]),//computed
         </pre>
 
-        <h2>取得Mutaitions</h2>
-        <p>commit 這個函式是呼叫 mutation 裡面的方法。</p>
+        <h2>Mutaitions</h2>
+        <p>commit 呼叫 mutation 的方法。</p>
         <pre>
              //script 引入
             import {mapMutations} from 'vuex'
@@ -106,18 +100,75 @@
             //className       類名
             //mutationsName   mutations名
             //fnctionName     fnction名
-            methods: {
-                //1.
-                ...mapMutations('className',{fnctionName:'mutationsName'});//methods
-                this.fnctionName(this.yourNumber);//templates 
 
-                //2.
-                ...mapMutations('className',['mutationsName']);//methods
-                this.mutationsName(this.yourNumber);//templates 
+            //1.
+            ...mapMutations('className',{fnctionName:'mutationsName'});//methods
+            this.fnctionName(this.yourValue);//templates 使用
 
-                //3.
-                this.$store.commit('className/mutationsName')
-            },
+            //2.
+            ...mapMutations('className',['mutationsName']);//methods
+            this.mutationsName(this.yourValue);//templates 使用
+
+            //3.
+            this.$store.commit('className/mutationsName');//methods
+        </pre>
+
+        <h2>Actions</h2>
+        <p>dispatch 呼叫 action 的方法</p>
+        <p>這邊可以做非同步處理，例如 AJAX</p>
+        <pre>
+            //1.
+            this.$store.dispatch('className/actionsName')   //mounted 執行非同步
+            ...mapState('className', ['stateName'])         //computed 取得data
+            <tageName :items="stateName"></tageName>        //template 使用
+
+            //2.
+            ...mapActions([
+                "increment", // 將 `this.increment()` 映射為 `this.$store.dispatch('increment')`
+
+                // `mapActions` 也支持载荷：
+                "incrementBy" // 將 `this.incrementBy(amount)` 映射為 `this.$store.dispatch('incrementBy', amount)`
+            ]),//methods
+
+            //3.
+            ...mapActions({
+                add: "increment" // 將 `this.add()` 映射為 `this.$store.dispatch('increment')`
+            })//methods
+        </pre>
+        <p>組合 actions</p>
+        <pre>
+            //Promise
+            actions: {
+                actionA ({ commit }) {
+                    return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        commit('someMutation')
+                        resolve()
+                    }, 1000)
+                    })
+                }
+            }
+
+            //then
+            actions: {
+                // ...
+                actionB ({ dispatch, commit }) {
+                    return dispatch('actionA').then(() => {
+                        commit('someOtherMutation')
+                    })
+                }
+            }
+
+            //async
+            actions: {
+                async actionA ({ commit }) {
+                    commit('gotData', await getData())
+                },
+                async actionB ({ dispatch, commit }) {
+                    await dispatch('actionA') // 等待 actionA 完成
+                    commit('gotOtherData', await getOtherData())
+                }
+            }
         </pre>
 
         <h2>getters</h2>
@@ -126,27 +177,26 @@
             //script 引入
             import {mapGetters} from "vuex";
 
-            computed: {
-                //無className寫法
-                //1.
-                getterName() {
-                    return this.$store.getters["getterName"];
-                },
-                //2.
-                ...mapGetters(['getterName']),
+            //無className寫法
+            //1.
+            getterName() {
+                return this.$store.getters["getterName"];
+            },//computed
+            //2.
+            ...mapGetters(['getterName']),//computed
 
-                //有className寫法
-                //1.
-                getterName() {
-                    return this.$store.getters["className/getterName"];
-                },
-                //2.
-                ...mapGetters('className',{
-                    bindName: 'getterName',
-                }),
-                //3.
-                ...mapGetters('className',['getterName','getterName2'])
-            },
+
+            //有className寫法
+            //1.
+            getterName() {
+                return this.$store.getters["className/getterName"];
+            },//computed
+            //2.
+            ...mapGetters('className',{
+                bindName: 'getterName',
+            }),//computed
+            //3.
+            ...mapGetters('className',['getterName','getterName2'])
         </pre>
         <p>getters裡的stateName要有預設不然filter會報錯</p>
         <pre>
