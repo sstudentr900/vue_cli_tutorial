@@ -97,10 +97,10 @@ const routes = [{
             import ('../views/nprogressView.vue')
     },
     {
-        path: '/model',
-        name: 'model',
+        path: '/input',
+        name: 'input',
         component: () =>
-            import ('../views/modelView.vue')
+            import ('../views/inputView.vue')
     },
     {
         path: '/image',

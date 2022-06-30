@@ -50,7 +50,8 @@
         <p>{{count}}</p>
         <button @click='count_add'>add</button>
         
-        <h2>路由 beforeEnter 發送 API：將導覽項目路由規劃成巢狀結構，直接在父層路由發送 API。</h2>
+        <h2>路由 beforeEnter 發送 API</h2>
+        <p>將導覽項目路由規劃成巢狀結構，直接在父層路由發送 API。</p>
         <pre>
             {
                 path: "/urlName",

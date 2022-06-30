@@ -16,6 +16,19 @@
             form v-on:submit.prevent="onSubmit"
         </pre>
 
+        <h2>@input事件是实时监控的，每次输入都会调用</h2>
+        <p>@keyup.enter需要点击回车键触发</p>
+        <p>@change</p>
+        <p>@blur</p>
+        <hr>
+        <p> 一般在元件內的input使用v-model</p>
+        <input type="text" v-model="inputText" />
+        <p>@input監聽表單元素的即時變化 </p>
+        <input type="text" :value="inputText"  @input="inputText = $event.target.value" /> 
+        <p> @change監聽值改變 </p>
+        <input type="text" :value="inputText"  @change="inputText = $event.target.value" />
+        <p>顯示輸入內容：{{ inputText }}</p>
+
         <h2>「:」v-bind：綁定 attribute</h2>
         <p>disabled: {{ isUnclickable }}</p>
         <button type="button" :disabled="isUnclickable" @click="disabled">
@@ -44,7 +57,8 @@
             return {
                 clicks: 0,
                 isUnclickable: false,
-                is_class: false
+                is_class: false,
+                inputText: '55'
             };
         },
         methods: {
