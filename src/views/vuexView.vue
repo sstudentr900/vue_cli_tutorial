@@ -226,6 +226,21 @@
         </pre>
         <p>{{books}}</p>
 
+
+        <h2>areas()取不到mapState.districts</h2>
+        <pre>
+            computed: {
+                ...mapState('register', ["districts"]),
+                areas() {
+                    if (Object.keys(this.districts).length === 0) {
+                        return [];
+                    } else {
+                        return this.districts;
+                    }
+
+                },
+            },
+        </pre>
         <br>
         <br>
         <hr>
