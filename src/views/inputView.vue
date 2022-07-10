@@ -10,9 +10,10 @@
         </select>
         <input type="text" v-model="zip"> 
         <br> -->
-        <h2>Vue 實作 鄉鎮市區下拉選單(封裝)</h2>
-        <Select v-model="cityIdx" :options="cities"></Select>
-        <Select v-model="areaIdx" :options="areas"></Select>
+        
+        <h2>Vue封裝實作 鄉鎮市區下拉選單</h2>
+        <Select v-model:value="cityIdx" :options="cities"></Select>
+        <Select v-model:value="areaIdx" :options="areas"></Select>
         <br>
         <h2>選到第 {{cityIdx}} 個城市</h2>
         <h2>{{cityIdx}} - {{areaIdx}} - {{zip}}</h2>
@@ -32,8 +33,8 @@
         },
         data() {
             return {
-                cityIdx: 0,
-                areaIdx: 0
+                cityIdx: 1,
+                areaIdx: 1
             };
         },
         computed: {

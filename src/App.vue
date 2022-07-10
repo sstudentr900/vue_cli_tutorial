@@ -7,6 +7,7 @@
         <router-link to="/for">for</router-link>
         <router-link to="/input">input</router-link>
         <router-link to="/components">components</router-link>
+        <router-link to="/compositionAPI">compositionAPI</router-link>
         <router-link to="/vuex">vuex</router-link>
         <router-link to="/lifecycle">lifecycle</router-link>
         <router-link to="/watch">watch</router-link>

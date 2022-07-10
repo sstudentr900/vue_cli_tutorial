@@ -7,16 +7,15 @@
 <script>
     export default {
         name: "Select",
-        props: ["value", "options"],
+        props: ["value", "options"], //接收父傳來的值
         computed: {
             index: {
                 get() {
-                    console.log(this.value)
+                    //取得父model.value的值 
                     return this.value
                 },
                 set(val) {
-                    console.log(val)
-                        // input不能改
+                    //回傳給父值
                     this.$emit('input', val)
                 }
             }

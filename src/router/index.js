@@ -55,6 +55,12 @@ const routes = [{
             import ('../views/vifView.vue')
     },
     {
+        path: '/compositionAPI',
+        name: 'compositionAPI',
+        component: () =>
+            import ('../views/compositionAPIView.vue')
+    },
+    {
         path: '/components',
         name: 'components',
         component: () =>
