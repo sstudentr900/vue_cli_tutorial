@@ -28,12 +28,12 @@
                 export default {
                     name: 'HelloWorld',
                     setup() {
-                    let msg = ref(null);
-                    const changeMsg = () => {
-                        msg.value.classList.add('lalala');
-                        msg.value.textContent = 'Hello World'
-                    }
-                    return { msg, changeMsg }
+                        let msg = ref(null);
+                        const changeMsg = () => {
+                            msg.value.classList.add('lalala');
+                            msg.value.textContent = 'Hello World'
+                        }
+                        return { msg, changeMsg }
                     }
                 }
             &lt;/script&gt;
@@ -136,6 +136,7 @@
         <br>
         <hr>
         <a href="https://www.letswrite.tw/vue3-composition-api/">Vue.js 3 Composition API</a>
+        <a href="https://ithelp.ithome.com.tw/articles/10272253">Composition API</a>
     </div>
 </template>
 <script>
